@@ -17,10 +17,6 @@ bool Fecha::leerFecha() {
     return true;
 }
 
-void Fecha::escribirFecha(){
-    cout << this-> dia << "/" << this->mes << "/" << this->ano << " " << this->hora << ":" << this->minuto << ":" << this->segundo << endl;
-}
-
 bool Fecha::esIgual(Fecha &otro){
     return (otro.ano == this->ano &&
     otro.mes == this->mes &&
@@ -30,16 +26,26 @@ bool Fecha::esIgual(Fecha &otro){
     otro.segundo == this->segundo);
 }
 
-bool Fecha::esMenor(Fecha &otro){
-    if (this->esIgual(otro))
-        return false;
-    if (otro.ano != this->ano) return otro.ano < this->ano;
-    if (otro.mes != this->mes) return otro.mes < this->mes;
-    if (otro.dia != this->dia) return otro.dia < this->dia;
-    if (otro.hora != this->hora) return otro.hora < this->hora;
-    if (otro.minuto != this->minuto) return otro.minuto < this->minuto;
-    if (otro.segundo != this->segundo) return otro.segundo < this->segundo;
+void Fecha::escribirFecha() {
+    cout << dia << "/";
+    cout << mes << "/";
+    cout << ano << " ";
+    if (hora < 10) cout << "0"; cout << hora << ":";
+    if (minuto < 10) cout << "0"; cout << minuto << ":";
+    if (segundo < 10) cout << "0"; cout << segundo;
 }
+
+bool Fecha::esMenor(Fecha &otro) {
+    if (this->esIgual(otro)) return false;
+    if (ano != otro.ano) return ano < otro.ano;
+    if (mes != otro.mes) return mes < otro.mes;
+    if (dia != otro.dia) return dia < otro.dia;
+    if (hora != otro.hora) return hora < otro.hora;
+    if (minuto != otro.minuto) return minuto < otro.minuto;
+    if (segundo != otro.segundo) return segundo < otro.segundo;
+}
+
+
     
 Fecha::Fecha(){
     this->dia = 0;

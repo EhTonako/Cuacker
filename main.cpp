@@ -17,10 +17,9 @@ void imprimirListadoCuacs() {
     for (it = lista.begin(); it != lista.end(); it++) {
         cout << contador << ". ";
         it->escribir();
-        cout << endl;
         contador++;
     }
-    cout << "Total: " << lista.size() << " cuacs" << endl;
+    cout << "Total: " << lista.size() << " cuac" << endl;
 }
 
 void procesar_pcuac()
@@ -39,8 +38,15 @@ void procesar_mcuac()
     cout << dic.numElem() << " cuac" << endl;
 }
 
-void procesar_follow()
-{
+void procesar_last() {
+    int N;
+    if (!(cin >> N)) return;
+    cout << "last " << N << endl;
+    lista = dic.last(N);
+    imprimirListadoCuacs();
+}
+
+void procesar_follow() {
     string nombre;
     cin >> nombre;
     cout << "follow " << nombre << endl;
@@ -48,27 +54,17 @@ void procesar_follow()
     imprimirListadoCuacs();
 }
 
-void procesar_last()
-{
-    int N;
-    if (!(cin >> N)) return;
-    lista = dic.last(N);
-    imprimirListadoCuacs();
-}
-
-void procesar_date()
-{
+void procesar_date() {
     Fecha fmin, fmax;
     if (!fmin.leerFecha()) return;
     if (!fmax.leerFecha()) return;
     cout << "date ";
-    fmin.escribirFecha();
-    cout << " ";
-    fmax.escribirFecha();
-    cout << endl;
+    fmin.escribirFecha(); cout << " ";
+    fmax.escribirFecha(); cout << endl;
     lista = dic.date(fmin, fmax);
     imprimirListadoCuacs();
 }
+
 
 int main()
 {

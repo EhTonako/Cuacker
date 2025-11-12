@@ -52,18 +52,19 @@ string decodificar(int num) {
 }
 
 bool Cuac::leer_mcuac() {
-    cin >> usuario;
-    if (!fecha.leerFecha()) return false;
+    cin.ignore(); // limpiar buffer
+    getline(cin, usuario);
+    fecha.leerFecha();
     cin.ignore();
     getline(cin, texto);
     return true;
 }
 
 bool Cuac::leer_pcuac() {
-    int index;
-    cin >> usuario;
-    if (!fecha.leerFecha()) return false;
-    cin >> index;
+    cin.ignore();
+    getline(cin, usuario);
+    fecha.leerFecha();
+    int index; cin >> index;
     texto = decodificar(index);
     return true;
 }
@@ -71,8 +72,9 @@ bool Cuac::leer_pcuac() {
 void Cuac::escribir() {
     cout << usuario << " ";
     fecha.escribirFecha();
-    cout << "\n   " << texto << endl;
+    cout << endl << "   " << texto << endl;
 }
+
 
 bool Cuac::es_anterior(Cuac& otro) {
     if (!fecha.esIgual(otro.fecha)) return !fecha.esMenor(otro.fecha);

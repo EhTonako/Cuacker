@@ -1,6 +1,6 @@
-#include "../modulos/cuac/cuac.h"
-#include "../modulos/diccionarioCuacs/diccionarioCuacs.h"
-#include "../modulos/fecha/fecha.h"
+#include "cuac/cuac.h"
+#include "diccionarioCuacs/diccionarioCuacs.h"
+#include "fecha/fecha.h"
 #include <iostream>
 #include <string>
 #include <list>

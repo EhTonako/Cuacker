@@ -9,6 +9,7 @@ using namespace std;
 
 class Cuac {
     friend class DiccionarioCuacs;
+    friend class TablaHash;
     private:
         Fecha fecha;
         string usuario;

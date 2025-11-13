@@ -2,22 +2,30 @@
 #define DICCIONARIOCUACS
 
 #include "../cuac/cuac.h"
+#include "../tablaHash/tablaHash.h"
 #include <list>
 
+class DiccionarioCuacs
+{
+private:
+    TablaHash tabla;
 
-class DiccionarioCuacs {
-    private:
-        list<Cuac> cuacs;
-        int contador;
-    public:
-        DiccionarioCuacs();
-        void insertar(Cuac nuevo);
-        list<Cuac> last(int N);
-        list<Cuac> follow(string nombre);
-        list<Cuac> date(Fecha f1, Fecha f2);
-        int numElem() {
-            return contador;
-        }
+public:
+    DiccionarioCuacs(); 
+    //-> SI SE PUEDE QUITAR EL CONSTRUCTOR DADO QUE
+    // TABLAHASH TIENE UNO POR DEFECTO Y SE INVOCA AUTOMÁTICAMENTE
+    void insertar(Cuac nuevo)
+    {
+        tabla.insertar(nuevo);
+    };
+    list<Cuac> follow(string nombre)
+    {
+        tabla.consultar(nombre);
+    };
+    int numElem()
+    {
+        return tabla.numElem();
+    }
 };
 
 #endif

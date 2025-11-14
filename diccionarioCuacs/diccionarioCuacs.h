@@ -20,7 +20,7 @@ public:
     };
     list<Cuac> follow(string nombre)
     {
-        tabla.consultar(nombre);
+        return tabla.consultar(nombre);
     };
     int numElem()
     {

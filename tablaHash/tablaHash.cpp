@@ -60,6 +60,7 @@ void TablaHash::insertar(Cuac cuac) {
 
                 p.lista.insert(it, cuac);
                 nElem++;
+                return;
             }
         }
     }
@@ -72,18 +73,16 @@ void TablaHash::insertar(Cuac cuac) {
 }
 
 
-void TablaHash::consultar(string nombre) {
+list<Cuac> TablaHash::consultar(string nombre) {
     int idx = hash(nombre);
     for (Par &p : T[idx]) {
         if (p.nombre == nombre) {
-            int contador = 1;
-            for (Cuac cuac : p.lista) {
-                cout << contador << ". ";
-                cuac.escribir();
-                contador++;
-            }
+            return p.lista;
         }
     }
+
+    return list<Cuac>();
 }
+
 
 

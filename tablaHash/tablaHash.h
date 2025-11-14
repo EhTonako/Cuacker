@@ -26,7 +26,7 @@ public:
     ~TablaHash();
     int hash(string& nombre);
     void insertar(Cuac nuevo);
-    void consultar(string nombre);
+    list<Cuac> consultar(string nombre);
     int numElem(void) { return nElem; }
 };
 

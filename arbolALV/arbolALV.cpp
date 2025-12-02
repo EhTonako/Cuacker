@@ -71,16 +71,19 @@ list<Cuac> ArbolALV::last(int N) {
 void ArbolALV::dateRec(NodoALV* n, Fecha& f1, Fecha& f2, list<Cuac>& resultado) {
     if (!n) return;
 
-    if (f2.esMenor(n->fecha)) {
+    // n->fecha es más antigua que f1  → descartar izquierda
+    if (n->fecha.esMenor(f1)) {
         dateRec(n->der, f1, f2, resultado);
         return;
     }
 
-    if (n->fecha.esMenor(f1)) {
+    // f2 es más antigua que n->fecha → descartar derecha
+    if (f2.esMenor(n->fecha)) {
         dateRec(n->izq, f1, f2, resultado);
         return;
     }
 
+    // Está dentro del rango → recorrer en orden descendente
     dateRec(n->der, f1, f2, resultado);
 
     for (Cuac* c : n->cuacs) {
@@ -92,7 +95,6 @@ void ArbolALV::dateRec(NodoALV* n, Fecha& f1, Fecha& f2, list<Cuac>& resultado) 
 
     dateRec(n->izq, f1, f2, resultado);
 }
-
 
 list<Cuac> ArbolALV::date(Fecha f1, Fecha f2) {
     list<Cuac> resultado;

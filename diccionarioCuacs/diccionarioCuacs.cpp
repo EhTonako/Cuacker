@@ -2,6 +2,6 @@
 #include <iostream>
 using namespace std;
 
-DiccionarioCuacs::DiccionarioCuacs(){}
+// DiccionarioCuacs::DiccionarioCuacs(){}
 
    

@@ -38,13 +38,13 @@ void procesar_mcuac()
     cout << dic.numElem() << " cuac" << endl;
 }
 
-// void procesar_last() {
-//     int N;
-//     if (!(cin >> N)) return;
-//     cout << "last " << N << endl;
-//     lista = dic.last(N);
-//     imprimirListadoCuacs();
-// }
+void procesar_last() {
+    int N;
+    if (!(cin >> N)) return;
+    cout << "last " << N << endl;
+    lista = dic.last(N);
+    imprimirListadoCuacs();
+}
 
 void procesar_follow() {
     string nombre;
@@ -54,16 +54,16 @@ void procesar_follow() {
     imprimirListadoCuacs();
 }
 
-// void procesar_date() {
-//     Fecha fmin, fmax;
-//     if (!fmin.leerFecha()) return;
-//     if (!fmax.leerFecha()) return;
-//     cout << "date ";
-//     fmin.escribirFecha(); cout << " ";
-//     fmax.escribirFecha(); cout << endl;
-//     lista = dic.date(fmin, fmax);
-//     imprimirListadoCuacs();
-// }
+void procesar_date() {
+    Fecha fmin, fmax;
+    if (!fmin.leerFecha()) return;
+    if (!fmax.leerFecha()) return;
+    cout << "date ";
+    fmin.escribirFecha(); cout << " ";
+    fmax.escribirFecha(); cout << endl;
+    lista = dic.date(fmin, fmax);
+    imprimirListadoCuacs();
+}
 
 
 int main()
@@ -75,9 +75,9 @@ int main()
         if (comando == "exit") break;
         if (comando == "mcuac") procesar_mcuac();
         if (comando=="pcuac") procesar_pcuac();
-        // if (comando == "last") procesar_last();
+        if (comando == "last") procesar_last();
         if (comando == "follow") procesar_follow();
-        // if (comando == "date") procesar_date();        
+        if (comando == "date") procesar_date();     
     }
 
     return 0;

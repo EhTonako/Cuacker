@@ -10,6 +10,9 @@ using namespace std;
 class Cuac {
     friend class DiccionarioCuacs;
     friend class TablaHash;
+    friend class ArbolALV;
+    friend class NodoALV;
+
     private:
         Fecha fecha;
         string usuario;

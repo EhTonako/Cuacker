@@ -18,60 +18,50 @@ int TablaHash::hash(string& nombre) {
     return h % M;
 }
 
-
-void TablaHash::insertar(Cuac cuac) {
+Cuac* TablaHash::insertar(Cuac cuac) 
+{
     int idx = hash(cuac.usuario);
-    for (Par &p : T[idx]) {
-        if (p.nombre == cuac.usuario) {
-           {
-                // Recorremos el bucle para comprobar si ya existe exactamente
-                list<Cuac>::iterator itCheck;
-                for (itCheck = p.lista.begin(); itCheck != p.lista.end(); ++itCheck) {
-                    if (itCheck->fecha.esIgual(cuac.fecha) &&
-                        itCheck->usuario == cuac.usuario &&
-                        itCheck->texto == cuac.texto) {
-                        return; // No insertamos el dato duplicado
-                    }
-                }
-                // Recorremos el bucle para buscar la posición correcta
-                list<Cuac>::iterator it = p.lista.begin();
-                while (it != p.lista.end()) {
-                    // Comparamos las fechas
-                    if (cuac.fecha.esMenor(it->fecha)) {
-                        // Si el nuevo es más antiguo, seguimos recorriendo el listado
-                        ++it; 
-                        continue;
-                    } else if (it->fecha.esIgual(cuac.fecha)) {
-                        // Comparamos el texto alfabéticamente
-                        if (cuac.texto > it->texto) {
-                            ++it;
-                            continue;
-                        } else if (cuac.texto == it->texto) {
-                            // Comparamos el nombre de usuario alfabéticamente
-                            if (cuac.usuario > it->usuario) {
-                                ++it;
-                                continue;
-                            }
-                        }
-                    }
-                    // Al tener la posición correcta salimos del bucle;
-                    break;
-                }
 
-                p.lista.insert(it, cuac);
-                nElem++;
-                return;
+    for (Par &p : T[idx]) 
+    {
+        if (p.nombre == cuac.usuario) 
+        {
+            // 1. Comprobación de duplicados
+            for (Cuac &c : p.lista) {
+                if (c.fecha.esIgual(cuac.fecha) &&
+                    c.usuario == cuac.usuario &&
+                    c.texto   == cuac.texto) 
+                {
+                    return &c;  // ya existe → devolvemos su dirección REAL
+                }
             }
+
+            // 2. Insertar en orden
+            auto it = p.lista.begin();
+            while (it != p.lista.end()) {
+                if (cuac.fecha.esMenor(it->fecha)) { ++it; continue; }
+                if (it->fecha.esIgual(cuac.fecha) && cuac.texto > it->texto) {
+                    ++it; continue;
+                }
+                break;
+            }
+
+            it = p.lista.insert(it, cuac);
+            nElem++;
+            return &(*it);     // ← ← PUNTERO REAL al Cuac recién insertado
         }
     }
-    // SI NO SE ENCUENTRA, CREAMOS UN NUEVO PAR
+
+    // 3. Crear nuevo Par si no existe
     Par nuevoPar;
     nuevoPar.nombre = cuac.usuario;
     nuevoPar.lista.push_back(cuac);
     T[idx].push_back(nuevoPar);
     nElem++;
-}
 
+    // Devolver puntero al único elemento de esa lista
+    return &T[idx].back().lista.back();
+}
 
 list<Cuac> TablaHash::consultar(string nombre) {
     int idx = hash(nombre);

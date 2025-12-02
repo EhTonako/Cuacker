@@ -43,6 +43,7 @@ bool Fecha::esMenor(Fecha &otro) {
     if (hora != otro.hora) return hora < otro.hora;
     if (minuto != otro.minuto) return minuto < otro.minuto;
     if (segundo != otro.segundo) return segundo < otro.segundo;
+    return false;
 }
 
 

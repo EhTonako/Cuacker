@@ -35,12 +35,19 @@ void ArbolALV::insertarNodo(NodoALV*& nodo, Cuac* c) {
 
     nodo->altura = 1 + max(altura(nodo->izq), altura(nodo->der));
     int bf = balance(nodo);
-
-    if (bf > 1 && nodo->izq && c->fecha.esMenor(nodo->izq->fecha)) RSD(nodo);
-    else if (bf < -1 && nodo->der && nodo->der->fecha.esMenor(c->fecha)) RSI(nodo);
-    else if (bf > 1 && nodo->izq && nodo->izq->fecha.esMenor(c->fecha)) RDI(nodo);
-    else if (bf < -1 && nodo->der && c->fecha.esMenor(nodo->der->fecha)) RDD(nodo);
     
+    if (bf > 1) {
+        if (balance(nodo->izq) >= 0)
+        RSD(nodo);
+        else
+        RDD(nodo);
+    }
+    else if (bf < -1) {
+        if (balance(nodo->der) <= 0)
+        RSI(nodo);
+        else
+        RDI(nodo);
+    }
 }
 
 void ArbolALV::insertar(Cuac* cuac) {
@@ -100,4 +107,33 @@ list<Cuac> ArbolALV::date(Fecha f1, Fecha f2) {
     list<Cuac> resultado;
     dateRec(raiz, f1, f2, resultado);
     return resultado;
+}
+
+
+
+#define IZQ p->izq
+#define DER p->der
+#define Nodo NodoALV
+#define Arbol ArbolALV
+
+
+int Arbol::miAltura (Nodo *p) {
+	if (p == NULL)
+		return 0;
+	int aIz, aDr;
+	aIz = miAltura (IZQ);
+	aDr = miAltura (DER);
+	return 1 + ((aIz > aDr) ? aIz : aDr);
+}
+
+bool Arbol::esAVL (Nodo *p, string nivel) {
+	if (p == NULL)
+		return true;
+
+	int difOri, difAlt = difOri = miAltura (DER) - miAltura (IZQ);
+	difAlt *= difAlt;
+	if (difAlt > 2) cerr << "NODO: " << nivel << ", DIFALT: " << difOri << endl;
+	bool esIzq = esAVL (IZQ, nivel+"I");
+	bool esDer = esAVL (DER, nivel+"D");
+	return esDer && esIzq && (difAlt < 2);
 }

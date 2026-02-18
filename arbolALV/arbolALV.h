@@ -20,9 +20,16 @@ private:
     void lastRec(NodoALV* n, int& faltan, list<Cuac>& resultado);
     void dateRec(NodoALV* n, Fecha& f1, Fecha& f2, list<Cuac>& resultado);
 
+    static int miAltura (NodoALV *p);
+    static bool esAVL (NodoALV *p, std::string nivel = "");
+
 public:
     ArbolALV() : raiz(nullptr) {}
-    ~ArbolALV() { delete raiz; }
+    ~ArbolALV() { 
+        if (esAVL(raiz)) cerr << "¡¡SÍ AVL!!" << endl; 
+        else cout << "¡¡NO AVL!!" << endl;
+        delete raiz; 
+    }
 
     void insertar(Cuac* c);
     list<Cuac> last(int N);

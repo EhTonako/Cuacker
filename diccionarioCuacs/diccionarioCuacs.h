@@ -16,7 +16,11 @@ public:
     // DiccionarioCuacs();
     //-> SI SE PUEDE QUITAR EL CONSTRUCTOR DADO QUE
     // TABLAHASH TIENE UNO POR DEFECTO Y SE INVOCA AUTOMÁTICAMENTE
-    
+    ~DiccionarioCuacs(){
+        // El destructor de TablaHash se invoca automáticamente
+        // El destructor de ArbolALV se invoca automáticamente
+    };
+
     void insertar(Cuac nuevo)
     {
         Cuac *ref = tabla.insertar(nuevo);

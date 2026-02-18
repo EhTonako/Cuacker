@@ -1,7 +1,13 @@
 # Estamos guardando dentro de sus respectivas carpetas los .o generados cuando hacemos el "make";
 # De esta forma mantenemos el codigo mucho mas legible y ordenado para poder escalar más facilmente el proyecto;
-# Para realizar la funcion tar ahora tenemos que añadir lo siguiente para leer dentro de las carpetas: 
-# 	"tar -cf archivo.tar main.cpp Makefile $(find . -type f \( -name "*.cpp" -o -name "*.h" \))"
+# -> Para ejecutar el programa hay que realizar los siguientes pasos:
+#	0) Si estamos en windows activamos la virtualización: "wls"
+#	1) Generamos el ejecutable: "make"
+#	2) Para realizar pruebas hacemos: "./a.out"
+#		2.1) Para obtener la salida introduciendo unos valores de entrada: "./a.out < 301a.in > salida"
+#		2.2) Para comparar las salidas obtenida y la deseada: "diff 301a.out salida > diferencias"
+#	3) Para realizar la funcion tar ahora tenemos que añadir lo siguiente para leer dentro de las carpetas: 
+# 		"tar -cf archivo.tar main.cpp Makefile $(find . -type f \( -name "*.cpp" -o -name "*.h" \))"
 
 a.out: main.o cuac/cuac.o diccionarioCuacs/diccionarioCuacs.o fecha/fecha.o tablaHash/tablaHash.o arbolALV/arbolALV.o arbolALV/nodoALV.o
 	g++ main.o cuac/cuac.o diccionarioCuacs/diccionarioCuacs.o fecha/fecha.o tablaHash/tablaHash.o arbolALV/arbolALV.o arbolALV/nodoALV.o -o a.out

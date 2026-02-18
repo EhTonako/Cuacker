@@ -4,7 +4,7 @@ using namespace std;
 
 TablaHash::TablaHash(){
     nElem = 0;
-    M = 101;
+    M = 503;
     T = new list<Par>[M];
 }
 

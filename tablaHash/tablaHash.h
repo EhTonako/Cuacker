@@ -21,10 +21,11 @@ private:
     int M;
     int nElem;
 
+    int hash(string nombre) const;
+
 public:
     TablaHash();
     ~TablaHash();
-    int hash(string& nombre);
     Cuac* insertar(Cuac nuevo);
     list<Cuac> consultar(string nombre);
     int numElem(void) { return nElem; }

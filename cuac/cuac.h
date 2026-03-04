@@ -6,7 +6,6 @@
 #include "../fecha/fecha.h"
 using namespace std;
 
-
 class Cuac {
     friend class DiccionarioCuacs;
     friend class TablaHash;

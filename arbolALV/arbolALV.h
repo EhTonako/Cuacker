@@ -26,8 +26,8 @@ private:
 public:
     ArbolALV() : raiz(nullptr) {}
     ~ArbolALV() { 
-        if (esAVL(raiz)) cerr << "¡¡SÍ AVL!!" << endl; 
-        else cout << "¡¡NO AVL!!" << endl;
+        // if (esAVL(raiz)) cerr << "¡¡SÍ AVL!!" << endl; 
+        // else cout << "¡¡NO AVL!!" << endl;
         delete raiz; 
     }
 
